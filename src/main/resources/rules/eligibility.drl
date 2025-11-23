@@ -1,0 +1,22 @@
+package rules
+
+import com.example.model.Person;
+import com.example.model.Result;
+
+rule "Adult person -> eligible"
+    when
+        $p : Person( age >= 18 )
+    then
+        Result result = new Result("Person " + $p.getName() + " is an adult and eligible.");
+        insert(result);
+        System.out.println(result);
+end
+
+rule "Minor person -> not eligible"
+    when
+        $p : Person( age < 18 )
+    then
+        Result result = new Result("Person " + $p.getName() + " is a minor and NOT eligible.");
+        insert(result);
+        System.out.println(result);
+end
